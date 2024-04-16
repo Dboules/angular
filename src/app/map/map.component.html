@@ -1,0 +1,3 @@
+<div id="map"></div>
+<app-map-context-menu [position]="contextMenuPosition" [feature]="selectFeature" (featureClick)="overlayInfo = $event"></app-map-context-menu>
+<app-map-overlay [map]="map" [overlayInfo]="overlayInfo"></app-map-overlay>
