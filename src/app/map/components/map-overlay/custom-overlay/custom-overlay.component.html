@@ -1,6 +1,7 @@
 <div class="overlay-content">
+  <span class="close" (click)="closeOverlay.emit(overlayId)" nz-icon nzType="close-circle" nzTheme="outline"></span>
   <div class="overlay-title">
-    <span nz-icon nzType="environment" nzTheme="outline"></span>
+    <span nz-icon nzType="environment" nzTheme="outline" style="margin-right: 4px;"></span>
     <span>{{ data.name }}</span>
   </div>
   <!-- <div class="overlay-description">{{data}}</div> -->

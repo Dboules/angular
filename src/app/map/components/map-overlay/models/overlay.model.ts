@@ -1,7 +1,7 @@
 import { EventEmitter, Type } from '@angular/core'
 import { Coordinate } from 'ol/coordinate'
 import { CustomOverlayComponent } from '../custom-overlay/custom-overlay.component'
-import { Overlay } from 'ol'
+import { Options as OverlayOptions } from 'ol/Overlay'
 
 export enum OverlayKey {
   CUSTOM_OVERLAY = 'custom-overlay',
@@ -19,15 +19,17 @@ export interface OverlayComponent {
   overlayId: string
   closeOverlay: EventEmitter<void>
 }
+
 export const OverlayComponentMap = new Map<OverlayKey, Type<OverlayComponent>>([[OverlayKey.CUSTOM_OVERLAY, CustomOverlayComponent]])
-export const OverlayProperties = new Map<OverlayKey, Overlay>([
+export const OverlayProperties = new Map<OverlayKey, OverlayOptions>([
   [
     OverlayKey.CUSTOM_OVERLAY,
-    new Overlay({
+    {
       id: undefined,
       element: undefined,
       positioning: 'bottom-center',
       autoPan: true,
-    }),
+      offset: [0, -40]
+    },
   ],
 ])

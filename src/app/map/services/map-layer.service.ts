@@ -10,7 +10,7 @@ import { fromLonLat } from 'ol/proj'
   providedIn: 'root',
 })
 export class MapLayerService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   createFeatureLayerStyle(features: FeatureLike, _resolution: number) {
     const size: number = features.get('features').length
@@ -47,17 +47,17 @@ export class MapLayerService {
           anchor: [0.5, 1],
           scale: 1,
         }),
-        text: new Text({
-          text: properties?.['name'],
-          fill: new Fill({
-            color: '#000',
-          }),
-          stroke: new Stroke({
-            color: '#000',
-          }),
-          offsetY: 5,
-          font: 'normal 12px sans-serif',
-        }),
+        // text: new Text({
+        //   text: properties?.['name'],
+        //   fill: new Fill({
+        //     color: '#000',
+        //   }),
+        //   stroke: new Stroke({
+        //     color: '#000',
+        //   }),
+        //   offsetY: 5,
+        //   font: 'normal 12px sans-serif',
+        // }),
       })
     }
     return style

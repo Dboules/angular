@@ -13,6 +13,5 @@ export class CustomOverlayComponent {
   @Input() overlayId: any
   @Input() closeOverlay = new EventEmitter<void>() // 定义一个事件发射器;
   ngOnInit(): void {
-    console.log(this.data)
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectorRef, Component } from '@angular/core'
 import { Feature, Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
@@ -16,6 +16,7 @@ import { MapContextMenuPosition } from './models/context-menu'
 import { FormsModule } from '@angular/forms'
 import { OverlayInfo } from './components/map-overlay/models/overlay.model'
 import { boundingExtent } from 'ol/extent'
+import { generateHash } from '../../shared/utils'
 @Component({
   selector: 'app-map',
   standalone: true,
@@ -35,7 +36,7 @@ export class MapComponent {
   overlayInfo!: OverlayInfo
   selectFeature: any
   contextMenuPosition!: MapContextMenuPosition
-  constructor(private mapLayerService: MapLayerService) {}
+  constructor(private mapLayerService: MapLayerService, private cdr: ChangeDetectorRef) { }
   ngOnInit() {
     this.layer = new VectorLayer({
       style: (features, _resolution) => this.mapLayerService.createFeatureLayerStyle(features, _resolution),
@@ -49,6 +50,7 @@ export class MapComponent {
       controls: defaults(),
       layers: [new TileLayer({ source: new OSM() }), this.layer, this.localMarkerLayer],
     })
+    this.cdr.detectChanges()
     this.registerMapEvent()
     this.renderFeatures()
   }
@@ -58,10 +60,11 @@ export class MapComponent {
       if (feature) {
         const properties = feature.getProperties()
         let f
-        if (properties['features']?.length === 1) {
-          f = properties['features'][0]
+        if (properties['features']?.length === 1 || properties['name'] === 'local marker') {
           if (properties['name'] === 'local marker') {
             f = feature
+          } else {
+            f = properties['features'][0]
           }
           const position = this.map.getPixelFromCoordinate(f.getGeometry()?.getCoordinates())
           this.selectFeature = f
@@ -109,6 +112,7 @@ export class MapComponent {
           year: parseInt(item[2]) || 0,
           geometry: new Point(fromLonLat([parseFloat(item[4]), parseFloat(item[3])])),
           name: item[0],
+          id: generateHash(10),
         })
         features.push(_feature)
       })

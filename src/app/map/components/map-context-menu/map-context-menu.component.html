@@ -1,6 +1,6 @@
-<div #placeholder class="placeholder-element" [ngStyle]="position"></div>
+<div #placeholder class="placeholder-element" [ngStyle]="position" [title]="tooltipText"></div>
 <div #contextmenu class="context-menu" [ngStyle]="contextMenuPosition">
-  <div class="menu-item" (click)="onClick('menuItem1')">menuItem1</div>
-  <div class="menu-item" (click)="onClick('menuItem2')">menuItem2</div>
-  <div class="menu-item" (click)="onClick('menuItem3')">menuItem3</div>
+  <div class="menu-item" (click)="onClick('menuItem1')">menu Item 1</div>
+  <div class="menu-item" (click)="onClick('menuItem2')">menu Item 2</div>
+  <div class="menu-item" (click)="onClick('menuItem3')">menu Item 3</div>
 </div>
