@@ -5,7 +5,7 @@ import VectorLayer from 'ol/layer/Vector'
 import { fromLonLat } from 'ol/proj'
 import { Cluster, OSM } from 'ol/source'
 import VectorSource from 'ol/source/Vector'
-import { defaults } from 'ol/control'
+import { defaults as defaultControls, ScaleLine } from 'ol/control'
 import { MapLayerService } from './services/map-layer.service'
 import { Geometry, Point } from 'ol/geom'
 import { Coordinate } from 'ol/coordinate'
@@ -43,11 +43,13 @@ export class MapComponent {
     })
   }
   ngAfterViewInit() {
+    const scaleLine = new ScaleLine()
+    scaleLine.setUnits('metric')
     // 创建地图实例
     this.map = new Map({
       target: 'map',
       view: new View({ center: fromLonLat([104.06, 30.67]), zoom: 4 }),
-      controls: defaults(),
+      controls: defaultControls().extend([scaleLine]),
       layers: [new TileLayer({ source: new OSM() }), this.layer, this.localMarkerLayer],
     })
     this.cdr.detectChanges()

@@ -1,3 +1,25 @@
 <main>
-  <router-outlet></router-outlet>
+  <header>
+    <div class="tabs-container">
+      <!-- @for (tab of tabs; track $index) {
+        <div class="tab-container" (click)="selectTab(tab)">
+          <div class="tab-l" [class.active]="tab.active"></div>
+          <div class="tab-content" [class.active]="tab.active">
+            <span>{{ tab.label }}</span>
+            <span class="close-icon" nz-icon nzType="close" nzTheme="outline"></span>
+          </div>
+          <div class="tab-r" [class.active]="tab.active"></div>
+        </div>
+      } -->
+      @for (tab of tabs; track $index) {
+        <div class="tab-content" [class.active]="tab.active" (click)="selectTab(tab)">
+          <span>{{ tab.label }}</span>
+          <span class="close-icon" nz-icon nzType="close" nzTheme="outline" (click)="closeTab($event,tab)"></span>
+        </div>
+      }
+    </div>
+  </header>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
 </main>

@@ -1,4 +1,126 @@
 main {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+header {
+  height: 40px;
+  background-color: #cdcdcd;
+}
+
+section {
+  flex: 1;
+  padding-top: 8px;
+}
+
+.tabs-container {
+  display: flex;
+  height: 40px;
+  align-items: flex-end;
+  padding: 0 20px;
+
+  .tab-container {
+    height: 36px;
+    display: flex;
+    align-items: flex-end;
+
+    &:hover {
+
+      .tab-content,
+      .tab-l,
+      .tab-r {
+        opacity: 1;
+        background-color: #dadada;
+      }
+
+      .tab-l {
+        clip-path: path('M 0 8 L 8 8 L 8 0 L 8 0 Q 8 8 0 8 Z');
+      }
+
+      .tab-r {
+        clip-path: path('M 0 0 L 0 8 L 8 8 L 8 8 Q 0 8 0 0 Z');
+      }
+    }
+
+    .tab-l,
+    .tab-r {
+      width: 8px;
+      height: 8px;
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+        background-color: #fff;
+      }
+    }
+
+    .tab-l {
+      clip-path: path('M 0 8 L 8 8 L 8 0 L 8 0 Q 8 8 0 8 Z');
+    }
+
+    .tab-r {
+      clip-path: path('M 0 0 L 0 8 L 8 8 L 8 8 Q 0 8 0 0 Z');
+    }
+  }
+}
+
+.tab-content {
+  display: flex;
+  width: 160px;
+  height: 36px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 8px 8px 0 0;
+  cursor: default;
+  position: relative;
+
+  &:hover {
+    background-color: #dadada;
+    border-radius: 8px;
+  }
+
+  &.active {
+    background-color: #fff !important;
+    border-radius: 8px 8px 0 0 !important;
+    &::before,
+    &::after{
+      opacity: 1;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    opacity: 0;
+  }
+
+  &::before {
+    left: -8px;
+    bottom: 0;
+    clip-path: path('M 0 8 L 8 8 L 8 0 L 8 0 Q 8 8 0 8 Z');
+  }
+
+  &::after {
+    right: -8px;
+    bottom: 0;
+    clip-path: path('M 0 0 L 0 8 L 8 8 L 8 8 Q 0 8 0 0 Z');
+  }
+  .close-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 12px;
+    justify-content: center;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #cdcdcd;
+    }
+  }
+}
+
